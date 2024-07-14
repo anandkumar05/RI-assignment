@@ -1,0 +1,59 @@
+<app-bread-crumb [pageName]="'Add Employee Details'"></app-bread-crumb>
+<div class="container">
+    <form [formGroup]="employeeForm" #empForm="ngForm" (ngSubmit)="empForm.valid && formSubmit()">
+        <div class="emp-form py-4">
+            <div class="row">
+                <!-- Employer name input -->
+                <div class="col-12 mb-4">
+                    <label class="input-group" for="empName" [ngClass]="{ 'is-invalid': empForm.submitted && f.name.errors }">
+                        <span class="input-group-text"><img class="img img-fluid" alt="icons" src="assets/icons/user.svg"></span>
+                        <input type="text" class="form-control" name="empName" id="empName" formControlName="name" maxlength="100" placeholder="Employee name">
+                    </label>
+                    <div *ngIf="empForm.submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Employee name is required</div>
+                        <div *ngIf="!f.name.errors.required">Enter a valid name</div>
+                    </div>
+                </div>
+                <!-- Employee role input -->
+                <div class="col-12 mb-4">
+                    <div class="input-group" [ngClass]="{ 'is-invalid': empForm.submitted && f.role.errors }">
+                        <span class="input-group-text"><img class="img img-fluid" alt="icons" src="assets/icons/job.svg"></span>
+                        <select class="form-control" name="empRole" id="emprole" formControlName="role" [ngClass]="{ 'empPlaceholder': f.role.errors }" (change)="employeeForm.value.role == 'null' && employeeForm.get('role')?.setValue(null)">
+                            <option [value]="null">Select Role</option>
+                            <option class="styled-option" *ngFor="let data of roles" [value]="data.id">{{data.role}}</option>
+                        </select>
+                        <label class="input-group-text emp-select-arrow" for="emprole">
+                            <img class="img img-fluid" alt="icons" src="assets/icons/dropdown.svg">
+                        </label>
+                    </div>
+                    <div *ngIf="empForm.submitted && f.role.errors" class="invalid-feedback">
+                        <div *ngIf="f.role.errors.required">Role is required</div>
+                    </div>
+                </div>
+                <!-- Employee Join date and releving date input -->
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <div class="emp-calendar">
+                            <div class="input-group" (click)="openDatePicker('joinDate')" type="button">
+                                <span class="input-group-text"><img class="img img-fluid" alt="icons" src="assets/icons/calendar.svg"></span>
+                                <div class="form-control" [ngClass]="{ 'empPlaceholder': !employeeForm.value.joinDate }">{{ employeeForm.value.joinDate ? ( employeeForm.value.joinDate == today ? 'Today' : employeeForm.value.joinDate | date:'d MMM y' ) : 'No date'}}</div>
+                            </div>
+                        </div>
+                        <div class="my-auto">
+                            <img class="img img-fluid" alt="icons" src="assets/icons/arrow.svg">
+                        </div>
+                        <div class="emp-calendar">
+                            <div class="input-group" (click)="openDatePicker('relieveDate')" type="button">
+                                <span class="input-group-text"><img class="img img-fluid" alt="icons" src="assets/icons/calendar.svg"></span>
+                                <div class="form-control" [ngClass]="{ 'empPlaceholder': !employeeForm.value.relieveDate }">{{ employeeForm.value.relieveDate ? ( employeeForm.value.relieveDate == today ? 'Today' : employeeForm.value.relieveDate | date:'d MMM y' ) : 'No date'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" type="submit">submit</button>
+    
+        </div>
+        
+    </form>
+</div>

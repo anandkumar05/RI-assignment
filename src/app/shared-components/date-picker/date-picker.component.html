@@ -1,0 +1,17 @@
+<h1 class="px-3 pb-3">
+   
+</h1>
+
+<div class="px-1" style="min-width: 350px;">
+    <mat-calendar [selected]="selectedDate" [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="calenderChange($event)"></mat-calendar>
+</div>
+
+<div class="px-3 pb-3 pt-3">
+    <div class="d-flex justify-content-between w-100 px-1">
+        <label class="d-flex align-items-center justify-content-center theme-secondary fs-16"><img class="img img-fluid me-2" alt="icons" src="assets/icons/calendar.svg"> {{ selectedDate ? ( ds.getISODate(selectedDate) == today ? 'Today' : ds.getISODate(selectedDate) | date:'d MMM y' ) : 'No date'}}</label>
+        <div class="btn-group">
+            <button type="button" class="btn btn-theme-secondary me-3" (click)="onDismiss()">Cancel</button>
+            <button type="button" class="btn btn-theme-primary" (click)="onConfirm()">Save</button>
+        </div>
+    </div>
+</div>

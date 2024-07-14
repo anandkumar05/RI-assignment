@@ -1,1 +1,237 @@
-/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$assignment-primary: mat.define-palette(mat.$indigo-palette);
+$assignment-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$assignment-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$assignment-theme: mat.define-light-theme((
+  color: (
+    primary: $assignment-primary,
+    accent: $assignment-accent,
+    warn: $assignment-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($assignment-theme);
+
+@import "font.scss";
+
+:root {
+    --primary-color: #1DA1F2;
+    --sub-primary-color: #EDF8FF;
+    --secondary-color: #323238;
+    --sub-secondary-color: #949C9E;
+    --primary-font: "Roboto";
+}
+  
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--primary-font), sans-serif !important;
+  height: 100%;
+}
+
+// Buttons
+
+.btn-theme-primary {
+  color: #FFFFFF !important;
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  outline: 0 !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  transition: 0.3s ease-in-out;
+  font-size: 14px;
+  font-weight: 500 !important;
+}
+
+.btn-theme-secondary {
+  color: var(--primary-color) !important;
+  background-color: var(--sub-primary-color) !important;
+  border: 1px solid var(--sub-primary-color) !important;
+  outline: 0 !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  transition: 0.3s ease-in-out;
+  font-size: 14px;
+  font-weight: 500 !important;
+}
+
+// Radius
+
+.br-4 {
+  border-radius: 4px !important;
+}
+
+.br-6 {
+  border-radius: 6px !important;
+}
+
+.br-8 {
+  border-radius: 8px !important;
+}
+
+// Font
+
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fs-15 {
+  font-size: 15px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+// Colors
+
+.color-primary {
+  color: var(--primary-color);
+}
+
+.color-secondary {
+  color: var(--secondary-color);
+}
+
+.color-sub-secondary {
+  color: var(--sub-secondary-color);
+}
+
+.bgColor-primary {
+  background-color: #F2F2F2;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// Mat date picker design 
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 16px !important;
+}
+
+.mat-calendar {
+  font-family: var(--primary-font), sans-serif !important;
+}
+
+.mat-calendar-header {
+  .mat-calendar-controls {
+    justify-content: center;
+    margin: 10px 0;
+
+    .mat-mdc-button,
+    .mdc-icon-button {
+      --mat-mdc-button-persistent-ripple-color: transparent;
+      --mat-mdc-button-ripple-color: #1da0f220 ;
+    }
+    
+    .mat-calendar-period-button {
+      order: 2;
+      width: 155px;
+      font-size: 18px;
+      font-weight: 500;
+      padding: 0;
+      margin: 0;
+      color: var(--secondary-color);
+      .mat-calendar-arrow {
+        display: none;
+      }
+    }
+    .mat-calendar-previous-button {
+      order: 1;
+    }
+    .mat-calendar-next-button {
+      order: 3;
+    }
+    .mat-calendar-spacer {
+      display: none;
+    }
+    // .mat-calendar-previous-button::after,
+    // .mat-calendar-next-button::after {
+    //   display: none;
+    // }
+    // .mat-calendar-previous-button::before,
+    // .mat-calendar-next-button::before {
+    //   content: ''; /* Empty content for the pseudo-element */
+    //   display: inline-block;
+    //   width: 10px;
+    //   height: 15px;
+    //   background: url(./assets/icons/next.svg) no-repeat center center;
+    //   background-size: contain;
+    // }
+    .mat-calendar-previous-button::before {
+      transform: rotateY(180deg);
+    }
+    .mat-mdc-icon-button[disabled][disabled] {
+      opacity: 0.6;
+    }
+  }
+}
+
+.mat-calendar-content {
+  padding: 0 !important;
+  .mat-calendar-table-header {
+    .mat-calendar-table-header-divider::after {
+      display: none;
+    }
+  }
+  .mat-calendar-body-label{
+    opacity: 0;
+  }
+  .mat-calendar-body-label[colspan="7"] {
+    display: none;
+  }
+  .mat-calendar-table-header th,
+  .mat-calendar-body-cell .mat-calendar-body-cell-content {
+    padding-bottom: 0;
+    color: var(--secondary-color);
+    font-size: 15px;
+  }
+  .mat-calendar-body-disabled .mat-calendar-body-cell-content {
+    color: #E5E5E5 !important;
+  }
+
+  .mat-calendar-body-cell {
+    --mat-datepicker-calendar-date-selected-state-background-color: var(--primary-color);
+    --mat-datepicker-calendar-date-hover-state-background-color: #1da0f230;
+    --mat-datepicker-calendar-date-today-outline-color: var(--primary-color);
+    --mat-datepicker-calendar-date-focus-state-background-color: #1da0f230;
+    .mat-calendar-body-selected {
+      color: #FFFFFF;
+    }
+  }
+}
