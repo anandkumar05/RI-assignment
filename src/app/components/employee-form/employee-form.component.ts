@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { noNumbersOrSpecialChars, notOnlyWhitespace } from 'src/app/_configs/validators.config';
 import { roles } from 'src/app/_datas/roles.data';
 import { IEMPLOYEE } from 'src/app/_interfaces/employee.interface';
 import { IROLE } from 'src/app/_interfaces/role.interface';
@@ -27,7 +28,7 @@ export class EmployeeFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private dialog: MatDialog, private ds: DependencyService, private activeRoute: ActivatedRoute, private storage: StorageService, private router: Router) {
     this.employeeForm = this.fb.group({
       id: new FormControl(null),
-      name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+      name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), notOnlyWhitespace(), noNumbersOrSpecialChars()]),
       role: new FormControl(null, Validators.required),
       joinDate: new FormControl(this.ds.getISODate(new Date()), Validators.required),
       relieveDate: new FormControl(null)
