@@ -1,7 +1,14 @@
-<div class="emp-record py-3">
-    <div class="container">
-        <p class="fs-16 fw-medium color-secondary mb-2">{{employee.name}}</p>
-        <p class="fs-14 color-sub-secondary mb-2">{{roleEnum[employee.role]}}</p>
-        <p class="fs-12 color-sub-secondary mb-0">{{employee.joinDate}}</p>
+<div class="emp-record">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-md-10 col-8 py-3" [routerLink]="['/update',employee.id]" type="button">
+                <p class="fs-16 fw-medium color-secondary mb-2">{{employee.name}}</p>
+                <p class="fs-14 color-sub-secondary mb-2">{{roleEnum[employee.role]}}</p>
+                <p class="fs-12 color-sub-secondary mb-0">{{employee.joinDate | date:'d MMM, y'}} <span *ngIf="employee.relieveDate">- {{ employee.relieveDate | date:'d MMM, y' }}</span></p>
+            </div>
+            <div class="col-md-2 col-4 py-3 my-auto text-end">
+                <button type="button" class="btn btn-theme-danger" (click)="deleteEmployee(employee.id)"><img class="img img-fluid" alt="icons" src="assets/icons/delete.svg"></button>
+            </div>
+        </div>
     </div>
 </div>

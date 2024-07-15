@@ -51,6 +51,14 @@ body {
   height: 100%;
 }
 
+// container
+
+.custom-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
 // Buttons
 
 .btn-theme-primary {
@@ -134,14 +142,15 @@ body {
 .bgColor-primary {
   background-color: #F2F2F2;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 
 // Mat date picker design 
 
 .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 16px !important;
+}
+
+.mat-mdc-dialog-content {
+  max-height: 58vh !important;
 }
 
 .mat-calendar {

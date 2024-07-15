@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { employee } from 'src/app/_datas/employee.data';
 import { IEMPLOYEE } from 'src/app/_interfaces/employee.interface';
+import { StorageService } from 'src/app/_services/storage.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,6 +10,31 @@ import { IEMPLOYEE } from 'src/app/_interfaces/employee.interface';
 
 export class EmployeeListComponent {
 
-  currEmpList: IEMPLOYEE[] = employee;
-  prevEmpList: IEMPLOYEE[] = employee;
+  currEmpList!: IEMPLOYEE[];
+  prevEmpList!: IEMPLOYEE[];
+  employeeList: IEMPLOYEE[] = this.storage.getEmployeeList();
+
+  constructor(private storage: StorageService) {
+    
+  }
+
+  ngOnInit(): void {
+    this.getEmployeeList();
+  }
+
+  getEmployeeList() {
+    this.currEmpList = this.employeeList.filter(emp => !emp.relieveDate);
+    this.prevEmpList = this.employeeList.filter(emp => emp.relieveDate);
+  }
+
+  deleteEmployee(id: string) {
+    const employeeList: IEMPLOYEE[] = this.storage.getEmployeeList();
+    const index = this.employeeList.findIndex(emp => emp.id == id);
+    if (index !== -1) {
+      this.employeeList.splice(index, 1);
+    }
+    this.storage.setEmployeeList(this.employeeList);
+    this.employeeList = this.storage.getEmployeeList();
+    this.getEmployeeList()
+  }
 }

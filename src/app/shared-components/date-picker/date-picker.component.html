@@ -1,12 +1,28 @@
-<h1 class="px-3 pb-3">
-   
+<h1 class="px-3">
+    <div class="row">
+        <div class="col-6 pt-3" *ngIf="type == 'relieveDate'">
+            <button type="button" class="btn w-100 fw-normal" [ngClass]="selectedDate == null ? 'btn-theme-primary' : 'btn-theme-secondary'" (click)="selectedDate = null">No date</button>
+        </div>
+        <div class="col-6 pt-3">
+            <button type="button" class="btn w-100 fw-normal" [ngClass]="selectedDate && ds.getISODate(selectedDate) == today ? 'btn-theme-primary' : 'btn-theme-secondary'" (click)="selectDate('today')" [disabled]="type == 'relieveDate' && minDate && dateValidator(ds.getISODate(minDate), today, 'max')">Today</button>
+        </div>
+        <div class="col-6 pt-3" *ngIf="type == 'joinDate'">
+            <button type="button" class="btn w-100 fw-normal" [ngClass]="selectedDate && ds.getISODate(selectedDate) == nextMonday ? 'btn-theme-primary' : 'btn-theme-secondary'" (click)="selectDate('monday')" [disabled]="maxDate && dateValidator(ds.getISODate(maxDate), nextMonday, 'min')">Next Monday</button>
+        </div>
+        <div class="col-6 pt-3" *ngIf="type == 'joinDate'">
+            <button type="button" class="btn w-100 fw-normal" [ngClass]="selectedDate && ds.getISODate(selectedDate) == nextTuesday ? 'btn-theme-primary' : 'btn-theme-secondary'" (click)="selectDate('tuesday')" [disabled]="maxDate && dateValidator(ds.getISODate(maxDate), nextTuesday, 'min')">Next Tuesday</button>
+        </div>
+        <div class="col-6 pt-3" *ngIf="type == 'joinDate'">
+            <button type="button" class="btn w-100 fw-normal" [ngClass]="selectedDate && ds.getISODate(selectedDate) == afterAWeek ? 'btn-theme-primary' : 'btn-theme-secondary'" (click)="selectDate('afterAWeek')" [disabled]="maxDate && dateValidator(ds.getISODate(maxDate), afterAWeek, 'min')">After 1 week</button>
+        </div>
+    </div>
 </h1>
 
-<div class="px-1" style="min-width: 350px;">
+<div class="px-2 pt-0 pb-2" style="min-width: 300px; width: 100%;" mat-dialog-content>
     <mat-calendar [selected]="selectedDate" [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="calenderChange($event)"></mat-calendar>
 </div>
 
-<div class="px-3 pb-3 pt-3">
+<div class="px-3 pb-3 pt-3" mat-dialog-actions>
     <div class="d-flex justify-content-between w-100 px-1">
         <label class="d-flex align-items-center justify-content-center theme-secondary fs-16"><img class="img img-fluid me-2" alt="icons" src="assets/icons/calendar.svg"> {{ selectedDate ? ( ds.getISODate(selectedDate) == today ? 'Today' : ds.getISODate(selectedDate) | date:'d MMM y' ) : 'No date'}}</label>
         <div class="btn-group">

@@ -1,7 +1,8 @@
-.emp-form {
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+.emp-form-group {
+    // max-width: 500px;
+    // margin-left: auto;
+    // margin-right: auto;
+    min-height: calc(100vh - (59px + 91.2px));
 
     .input-group .form-control,.input-group .input-group-text {
         border: 0;
@@ -50,4 +51,8 @@
     .emp-calendar {
         width: calc(50% - 7%);
     }
+}
+
+.emp-form-actions {
+    border-top: 2px solid #F2F2F2;
 }

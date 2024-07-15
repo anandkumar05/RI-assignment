@@ -11,7 +11,6 @@ export class DependencyService {
     const date = new Date(dateStr);
     // const dateOnly =date.toISOString();
     const dateOnly = date.toLocaleDateString('en-CA');
-    console.log(dateOnly);
     return dateOnly
   }
 
@@ -21,5 +20,9 @@ export class DependencyService {
     const month = Number(dateArray[1]) - 1;
     const year = Number(dateArray[0]);
     return new Date(year, month, date);
+  }
+
+  generateId(): number {
+    return Math.floor(100000 + Math.random() * 900000);
   }
 }

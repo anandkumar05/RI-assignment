@@ -3,25 +3,25 @@
 <div class="emp-list-body">
     <div class="emp-curr-list" *ngIf="currEmpList.length !== 0">
         <div class="bgColor-primary">
-            <div class="container py-3">
+            <div class="custom-container py-3">
                 <h6 class="fs-16 fw-medium color-primary mb-0 ">Current employees</h6>
             </div>
         </div>
         <ng-container *ngFor="let emp of currEmpList; let i = index;">
-            <app-employee-record [employee]="emp" *ngIf="!emp.relieveDate"></app-employee-record>
+            <app-employee-record [employee]="emp" *ngIf="!emp.relieveDate" (deleteEvent)="deleteEmployee($event)"></app-employee-record>
         </ng-container>
     </div>
     <div class="emp-prev-list" *ngIf="prevEmpList.length !== 0">
         <div class="bgColor-primary">
-            <div class="container py-3">
+            <div class="custom-container py-3">
                 <h6 class="fs-16 fw-medium color-primary mb-0 ">Previous employees</h6>
             </div>
         </div>
         <ng-container *ngFor="let emp of prevEmpList; let i = index;">
-            <app-employee-record [employee]="emp" *ngIf="emp.relieveDate"></app-employee-record>
+            <app-employee-record [employee]="emp" *ngIf="emp.relieveDate" (deleteEvent)="deleteEmployee($event)"></app-employee-record>
         </ng-container>
     </div>
-    <div class="container" *ngIf="currEmpList.length === 0 && prevEmpList.length === 0">
+    <div class="custom-container" *ngIf="currEmpList.length === 0 && prevEmpList.length === 0">
         <div class="no-records">
             <img class="img img-fluid" alt="Placeholder" src="assets/images/placeholder.png">
             <h6 class="fs-18 fw-medium">No employee records found</h6>
@@ -29,12 +29,12 @@
     </div>
 </div>
 <div class="emp-list-foot bgColor-primary">
-    <div class="container">
+    <div class="custom-container">
         <div class="row py-3">
-            <div class="col-10 my-auto">
-                <p class="mb-0 foot-info" *ngIf="currEmpList.length !== 0 || prevEmpList.length !== 0">Swipe left to delete</p>
+            <div class="col-md-10 col-8 my-auto">
+                <p class="mb-0 foot-info" *ngIf="currEmpList.length !== 0 || prevEmpList.length !== 0">Click record to edit</p>
             </div>
-            <div class="col-2 text-end">
+            <div class="col-md-2 col-4 text-end">
                 <button class="btn btn-theme-primary br-8" routerLink="/create"><img class="img img-fluid"><img class="img img-fluid" alt="icons" src="assets/icons/plus.svg"></button>
             </div>
         </div>

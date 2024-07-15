@@ -15,6 +15,7 @@ import { DatePickerComponent } from './shared-components/date-picker/date-picker
 import { DatePipe } from '@angular/common';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomDateAdapter, MY_DATE_FORMATS } from './_configs/mat-date.config';
+import { AlertComponent } from './shared-components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CustomDateAdapter, MY_DATE_FORMATS } from './_configs/mat-date.config';
     EmployeeListComponent,
     BreadCrumbComponent,
     EmployeeRecordComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
